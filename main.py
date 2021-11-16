@@ -1,3 +1,5 @@
+readme = "/readme.txt"
+sh_readme = False
 #SEE THE COMMENTS BELOW
 
 san_esa = [88,111,84,62,63,61,61,50,46,53,75,87,72,56,44,133,152,151,151,95,94,94,82,88,121,145,130,105,150,135,159,162,137,136,114,110,132,137,150,132,101,137,140,151,155,75,128,95,96,97,136,143,110,110,127,134,99,94,103,110,113,126,144,103,148,83,104,114,127,113,124,152,152,156,162,43,60,49,54,53,54,47,49,51,50,51,63,64,59,57,55,53,56,63,59,82,95,107,107,95,96,107,120,148,152,139,157,102,94,78,86,82,68,57,63,69,68,67,69,59,55,58,62,82,72,74,56,60,56,60,77,69,61,67,66,56,45,60]
@@ -15,6 +17,7 @@ Please select one of theese cities:
 2: Quito
 3: Medellín
 4: Provide your own data
+5: Instructions
   
   """))
 
@@ -30,14 +33,17 @@ elif city == 2:
 elif city == 3:
   med_co.sort()
   c_aq = med_co
-else:
-  usc_uslnd.append(int(input("""
+elif city == 4:
+  c_aqp = int(input("""
 What is usually the air quality on your city?
-  """)))
+  """))
+elif city == 5:
+  sh_readme = True
+  c_aqp = 0
 #+++++++++++++++++++++++++++++++++++++++
 
 
-if city != 4:
+if city <= 3:
   #////////////////////////////////////////
   #Median:
   #////////////////////////////////////////
@@ -63,30 +69,31 @@ if city != 4:
   c_aqp = (c_aq[0]+c_aq[len(c_aq)-1]+c_aqm)/2
 
   #||||||||||||||||||||||||||||||||||||||||
-elif city == 4:
+elif city == 3:
   c_aqp = usc_uslnd[0]
   # To use information given by the user
-else:
-  print("")
 
-if c_aqp >= 300:
-  print("""
+if sh_readme == False:
+  if c_aqp >= 300:
+    print("""
 The air quality in this city is very dangerous, and living there can decrease your lifetime considerably (https://aqicn.org/scale/en/)""")
-elif c_aqp >= 201:
-  print("""
+  elif c_aqp >= 201:
+    print("""
 The air quality in this place can be hazardous for anyone (https://aqicn.org/scale/en/)""")
-elif c_aqp >= 151:
-  print("""
+  elif c_aqp >= 151:
+    print("""
 The air quality in this place can be unhealthy (https://aqicn.org/scale/en/)""")
-elif c_aqp >= 101:
-  print("""
+  elif c_aqp >= 101:
+    print("""
 The air quality in this place con be hazardous for sensitive groups (https://aqicn.org/scale/en/)""")
-elif c_aqp >= 51:
-  print("""
+  elif c_aqp >= 51:
+    print("""
 The air quality in this place is acceptable, but a very small group of people could be affected (https://aqicn.org/scale/en/)""")
-else:
-  print("""
+  else:
+    print("""
 The air quality in this place is good (https://aqicn.org/scale/en/)""")
+else:
+  print(open("readme.txt", "r").read())
 
 #------------------------------------
 #Variables
